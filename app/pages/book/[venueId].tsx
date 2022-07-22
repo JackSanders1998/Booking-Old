@@ -23,7 +23,7 @@ export const BookVenue = () => {
   )
 }
 
-const ShowVenuePage: BlitzPage = () => {
+const BookVenuePage: BlitzPage = () => {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
@@ -33,7 +33,7 @@ const ShowVenuePage: BlitzPage = () => {
   )
 }
 
-ShowVenuePage.authenticate = true
-ShowVenuePage.getLayout = (page) => <Layout>{page}</Layout>
+BookVenuePage.authenticate = true
+BookVenuePage.getLayout = (page) => <Layout>{page}</Layout>
 
-export default ShowVenuePage
+export default BookVenuePage
