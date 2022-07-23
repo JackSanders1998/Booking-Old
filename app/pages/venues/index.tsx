@@ -25,6 +25,15 @@ export const VenuesList = () => {
             <Link href={Routes.ShowVenuePage({ venueId: venue.id })}>
               <a>{venue.name}</a>
             </Link>
+            <ul>
+              {venue.timeSlots.map((timeSlot) => (
+                <li key={timeSlot.id}>
+                  <>
+                    {timeSlot.start} - {timeSlot.end}
+                  </>
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
