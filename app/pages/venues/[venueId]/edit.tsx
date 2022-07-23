@@ -39,6 +39,7 @@ export const EditVenue = () => {
             try {
               const updated = await updateVenueMutation({
                 id: venue.id,
+                // timeSlots: venue.timeSlots
                 ...values,
               })
               await setQueryData(updated)

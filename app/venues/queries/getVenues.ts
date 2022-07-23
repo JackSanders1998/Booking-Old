@@ -17,7 +17,8 @@ export default resolver.pipe(
       skip,
       take,
       count: () => db.venue.count({ where }),
-      query: (paginateArgs) => db.venue.findMany({ ...paginateArgs, where, orderBy }),
+      query: (paginateArgs) =>
+        db.venue.findMany({ ...paginateArgs, where, orderBy, include: { timeSlots: true } }),
     })
 
     return {
