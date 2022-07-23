@@ -14,11 +14,6 @@ const NewVenuePage: BlitzPage = () => {
 
       <VenueForm
         submitText="Create Venue"
-        // TODO use a zod schema for form validation
-        //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-        //         then import and use it here
-        // schema={CreateVenue}
-        // initialValues={{}}
         schema={createVenueSchema}
         initialValues={{ name: "", timeSlots: [] }}
         onSubmit={async (values) => {

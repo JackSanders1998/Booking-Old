@@ -28,16 +28,16 @@ export function render(
   ui: RenderUI,
   { wrapper, router, dehydratedState, ...options }: RenderOptions = {}
 ) {
-  if (!wrapper) {
-    // Add a default context wrapper if one isn't supplied from the test
-    wrapper = ({ children }: { children: React.ReactNode }) => (
-      <BlitzProvider dehydratedState={dehydratedState}>
-        <RouterContext.Provider value={{ ...mockRouter, ...router }}>
-          {children}
-        </RouterContext.Provider>
-      </BlitzProvider>
-    )
-  }
+  // if (!wrapper) {
+  //   // Add a default context wrapper if one isn't supplied from the test
+  //   wrapper = ({ children }: { children: React.ReactNode }) => (
+  //     <BlitzProvider dehydratedState={dehydratedState}>
+  //       <RouterContext.Provider value={{ ...mockRouter, ...router }}>
+  //         {children}
+  //       </RouterContext.Provider>
+  //     </BlitzProvider>
+  //   )
+  // }
   return defaultRender(ui, { wrapper, ...options })
 }
 
@@ -56,16 +56,16 @@ export function renderHook(
   hook: RenderHook,
   { wrapper, router, dehydratedState, ...options }: RenderHookOptions = {}
 ) {
-  if (!wrapper) {
-    // Add a default context wrapper if one isn't supplied from the test
-    wrapper = ({ children }) => (
-      <BlitzProvider dehydratedState={dehydratedState}>
-        <RouterContext.Provider value={{ ...mockRouter, ...router }}>
-          {children}
-        </RouterContext.Provider>
-      </BlitzProvider>
-    )
-  }
+  // if (!wrapper) {
+  //   // Add a default context wrapper if one isn't supplied from the test
+  //   wrapper = ({ children }) => (
+  //     <BlitzProvider dehydratedState={dehydratedState}>
+  //       <RouterContext.Provider value={{ ...mockRouter, ...router }}>
+  //         {children}
+  //       </RouterContext.Provider>
+  //     </BlitzProvider>
+  //   )
+  // }
   return defaultRenderHook(hook, { wrapper, ...options })
 }
 
