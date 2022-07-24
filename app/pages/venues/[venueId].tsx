@@ -57,7 +57,6 @@ const ShowVenuePage: BlitzPage = () => {
   )
 }
 
-ShowVenuePage.authenticate = false
 ShowVenuePage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default ShowVenuePage
