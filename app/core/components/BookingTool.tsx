@@ -13,6 +13,7 @@ import {
   parse,
   startOfToday,
 } from "date-fns"
+import { TimeSlot } from "@prisma/client"
 
 const events = [
   {
@@ -77,7 +78,8 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-export default function BookingTool(eventData: Date[]) {
+export default function BookingTool(props: any) {
+  console.log(props.eventData)
   let today: Date = startOfToday()
   let [selectedDay, setSelectedDay] = useState<Date[]>([])
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"))
