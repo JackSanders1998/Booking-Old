@@ -24,9 +24,11 @@
     ]
   },
   "dependencies": {
+    "@heroicons/react": "1.0.6",
     "@prisma/client": "3.16.0-integration-tmp-revert-node14.1",
     "autoprefixer": "10.4.7",
     "blitz": "0.45.5",
+    "date-fns": "2.29.1",
     "final-form": "4.20.7",
     "postcss": "8.4.14",
     "react": "18.0.0",
