@@ -1,7 +1,5 @@
-import { Suspense } from "react"
 import { Image, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import SigninButton from "app/auth/components/Signin"
 
 const features = [
   {
@@ -64,10 +62,6 @@ const Home: BlitzPage = () => {
           ))}
         </div>
       </div>
-
-      <Suspense fallback="Loading...">
-        <SigninButton />
-      </Suspense>
     </div>
   )
 }

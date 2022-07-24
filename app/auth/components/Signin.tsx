@@ -10,37 +10,26 @@ export const SigninButton = () => {
   const [logoutMutation] = useMutation(logout)
 
   if (currentUser) {
+    console.log("User id: ", currentUser.id)
+    console.log("User role: ", currentUser.role)
+
     return (
-      <>
-        <button
-          className="button small"
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </button>
-        <div>
-          User id: <code>{currentUser.id}</code>
-          <br />
-          User role: <code>{currentUser.role}</code>
-        </div>
-      </>
+      <button
+        className="inline-flex items-center px-1.5 py-1 border border-slate-07 text-base font-normal rounded text-slate-11 bg-slate-03 hover:bg-slate-08 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-08"
+        onClick={async () => {
+          await logoutMutation()
+        }}
+      >
+        Logout
+      </button>
     )
   } else {
     return (
-      <>
-        <Link href={Routes.SignupPage()}>
-          <a className="button small">
-            <strong>Sign up </strong>
-          </a>
-        </Link>
-        <Link href={Routes.SigninPage()}>
-          <a className="button small">
-            <strong>Sign in</strong>
-          </a>
-        </Link>
-      </>
+      <Link href={Routes.SigninPage()}>
+        <a className="inline-flex items-center px-1.5 py-1 border border-slate-07 text-base font-normal rounded text-slate-11 bg-slate-03 hover:bg-slate-08 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-08">
+          Sign in
+        </a>
+      </Link>
     )
   }
 }
