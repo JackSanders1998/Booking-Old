@@ -3,8 +3,10 @@ import { Head, Link, useRouter, useQuery, useParam, BlitzPage, useMutation, Rout
 import Layout from "app/core/layouts/Layout"
 import getVenue from "app/venues/queries/getVenue"
 import deleteVenue from "app/venues/mutations/deleteVenue"
+import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 
 export const Venue = () => {
+  const currentUser = useCurrentUser()
   const router = useRouter()
   const venueId = useParam("venueId", "number")
   const [deleteVenueMutation] = useMutation(deleteVenue)
@@ -31,9 +33,14 @@ export const Venue = () => {
         <button
           type="button"
           onClick={async () => {
-            if (window.confirm("This will be deleted")) {
-              await deleteVenueMutation({ id: venue.id })
-              router.push(Routes.VenuesPage())
+            if (currentUser) {
+              if (window.confirm("This will be deleted")) {
+                await deleteVenueMutation({ id: venue.id })
+                router.push(Routes.VenuesPage())
+              }
+            } else {
+              if (window.confirm("You must be signed in to delete venues")) {
+              }
             }
           }}
           style={{ marginLeft: "0.5rem" }}
