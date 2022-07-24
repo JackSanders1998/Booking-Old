@@ -8,7 +8,6 @@ export const BookVenue = () => {
   const router = useRouter()
   const venueId = useParam("venueId", "number")
   const [venue] = useQuery(getVenue, { id: venueId })
-  console.log(venue.name)
 
   return (
     <>
@@ -53,6 +52,7 @@ const BookVenuePage: BlitzPage = () => {
   )
 }
 
+BookVenuePage.authenticate = false
 BookVenuePage.suppressFirstRenderFlicker = true
 BookVenuePage.getLayout = (page) => <Layout>{page}</Layout>
 

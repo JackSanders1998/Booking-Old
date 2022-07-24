@@ -70,6 +70,7 @@ const VenuesPage: BlitzPage = () => {
   )
 }
 
+VenuesPage.authenticate = false
 VenuesPage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default VenuesPage

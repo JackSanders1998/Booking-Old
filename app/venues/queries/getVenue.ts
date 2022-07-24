@@ -7,7 +7,7 @@ const GetVenue = z.object({
   id: z.number().optional().refine(Boolean, "Required"),
 })
 
-export default resolver.pipe(resolver.zod(GetVenue), resolver.authorize(), async ({ id }) => {
+export default resolver.pipe(resolver.zod(GetVenue), async ({ id }) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
   const venue = await db.venue.findFirst({
     where: { id },
