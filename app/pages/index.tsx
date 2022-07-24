@@ -1,21 +1,23 @@
-import { Image, BlitzPage } from "blitz"
+import { Image, BlitzPage, Link } from "blitz"
 import Layout from "app/core/layouts/Layout"
 
 const features = [
   {
-    name: "Minimal and thoughtful",
+    name: "Book a venue",
     description:
-      "Book a venue. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     imageSrc: "https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-01.jpg",
     imageAlt:
       "White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.",
+    buttonLink: "/venues",
   },
   {
-    name: "Refined details",
+    name: "Add your venue to our database",
     description:
-      "Add your venue to our database. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     imageSrc: "https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-02.jpg",
     imageAlt: "Detail of zipper pull with tan leather and silver rivet.",
+    buttonLink: "/venues/new",
   },
 ]
 
@@ -33,15 +35,17 @@ const Home: BlitzPage = () => {
               key={feature.name}
               className="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:gap-x-8 lg:items-center"
             >
-              <div
-                className={classNames(
-                  featureIdx % 2 === 0 ? "lg:col-start-1" : "lg:col-start-8 xl:col-start-9",
-                  "mt-6 lg:mt-0 lg:row-start-1 lg:col-span-5 xl:col-span-4"
-                )}
-              >
-                <h3 className="text-lg font-medium text-gray-900">{feature.name}</h3>
-                <p className="mt-2 text-base text-slate-12">{feature.description}</p>
-              </div>
+              <Link href={feature.buttonLink}>
+                <div
+                  className={classNames(
+                    featureIdx % 2 === 0 ? "lg:col-start-1" : "lg:col-start-8 xl:col-start-9",
+                    "mt-6 lg:mt-0 lg:row-start-1 lg:col-span-5 xl:col-span-4"
+                  )}
+                >
+                  <h3 className="text-lg font-medium text-slate-10">{feature.name}</h3>
+                  <p className="mt-2 text-base text-slate-12">{feature.description}</p>
+                </div>
+              </Link>
               <div
                 className={classNames(
                   featureIdx % 2 === 0 ? "lg:col-start-6 xl:col-start-5" : "lg:col-start-1",
