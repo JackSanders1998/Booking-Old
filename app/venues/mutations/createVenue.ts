@@ -4,7 +4,7 @@ import { z } from "zod"
 
 export const CreateVenue = z.object({
   name: z.string().min(1, "You must name your venue."),
-  timeSlots: z.array(z.object({ id: z.number(), start: z.date(), end: z.date() })),
+  timeSlots: z.array(z.object({ start: z.date(), end: z.date() })),
 })
 
 export default resolver.pipe(resolver.zod(CreateVenue), resolver.authorize(), async (input) => {

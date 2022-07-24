@@ -77,7 +77,7 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-export default function BookingTool() {
+export default function BookingTool(eventData: Date[]) {
   let today: Date = startOfToday()
   let [selectedDay, setSelectedDay] = useState<Date[]>([])
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"))

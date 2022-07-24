@@ -20,6 +20,10 @@ export const Venue = () => {
         <h1>Venue {venue.id}</h1>
         <pre>{JSON.stringify(venue, null, 2)}</pre>
 
+        <Link href={Routes.BookVenuePage({ venueId: venue.id })}>
+          <a>Book </a>
+        </Link>
+
         <Link href={Routes.EditVenuePage({ venueId: venue.id })}>
           <a>Edit</a>
         </Link>

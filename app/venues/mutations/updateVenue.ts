@@ -5,7 +5,9 @@ import { z } from "zod"
 const UpdateVenue = z.object({
   id: z.number(),
   name: z.string(),
-  timeSlots: z.array(z.object({ id: z.number(), start: z.date(), end: z.date() })),
+  start: z.date(),
+  end: z.date(),
+  timeSlots: z.array(z.object({ id: z.number().optional(), start: z.date(), end: z.date() })),
 })
 
 export default resolver.pipe(
