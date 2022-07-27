@@ -4,6 +4,7 @@ import Layout from "app/core/layouts/Layout"
 import getVenue from "app/venues/queries/getVenue"
 import deleteVenue from "app/venues/mutations/deleteVenue"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
+import AddTimeSlotModal from "app/core/components/Modals/addTimeSlotModal"
 
 export const Venue = () => {
   const currentUser = useCurrentUser()
@@ -15,19 +16,30 @@ export const Venue = () => {
   return (
     <>
       <Head>
-        <title>Venue {venue.id}</title>
+        <title>Venue {venue.name}</title>
       </Head>
 
       <div>
-        <h1>Venue {venue.id}</h1>
-        <pre>{JSON.stringify(venue, null, 2)}</pre>
+        <h1>{venue.name}</h1>
+        {/* <pre>{JSON.stringify(venue, null, 2)}</pre> */}
+        <ul>
+          {venue.timeSlots.map((timeslot) => (
+            <li key={timeslot.id}>
+              <>
+                {timeslot.id}:{timeslot.start} - {timeslot.end} votes
+              </>
+            </li>
+          ))}
+        </ul>
 
         <Link href={Routes.BookVenuePage({ venueId: venue.id })}>
           <a>Book </a>
         </Link>
 
+        <AddTimeSlotModal />
+
         <Link href={Routes.EditVenuePage({ venueId: venue.id })}>
-          <a>Edit</a>
+          <a> Edit </a>
         </Link>
 
         <button
