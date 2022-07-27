@@ -30,16 +30,11 @@ export const EditVenue = () => {
 
         <VenueForm
           submitText="Update Venue"
-          // TODO use a zod schema for form validation
-          //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-          //         then import and use it here
-          // schema={UpdateVenue}
           initialValues={venue}
           onSubmit={async (values) => {
             try {
               const updated = await updateVenueMutation({
                 id: venue.id,
-                // timeSlots: venue.timeSlots
                 ...values,
               })
               await setQueryData(updated)

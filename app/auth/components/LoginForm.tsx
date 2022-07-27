@@ -12,9 +12,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
 
   return (
-    <div>
-      <h1>Sign in</h1>
-
+    <div className="bg-slate-02 min-h-screen text-slate-12 font-readex">
       <Form
         submitText="Sign in"
         schema={Login}

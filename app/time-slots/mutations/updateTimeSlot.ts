@@ -4,6 +4,8 @@ import { z } from "zod"
 
 const UpdateTimeSlot = z.object({
   id: z.number(),
+  start: z.date(),
+  end: z.date(),
 })
 
 export default resolver.pipe(
