@@ -4,7 +4,7 @@ import Layout from "app/core/layouts/Layout"
 import getVenue from "app/venues/queries/getVenue"
 import deleteVenue from "app/venues/mutations/deleteVenue"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
-import AddTimeSlotModal from "app/core/components/Modals/addTimeSlotModal"
+import AddTimeSlotModal from "app/core/components/Modals/AddTimeSlotModal"
 
 export const Venue = () => {
   const currentUser = useCurrentUser()
