@@ -55,27 +55,10 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
         </label>
 
         {touched && normalizedError && (
-          <div role="alert" style={{ color: "red" }}>
+          <div role="alert" className="text-red-600">
             {normalizedError}
           </div>
         )}
-
-        {/* <style jsx>{`
-          label {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
-          }
-        `}</style> */}
       </div>
     )
   }

@@ -19,7 +19,10 @@ model User {
   name           String?
   email          String   @unique
   hashedPassword String?
-  role           String   @default("USER")
+  role           String   @default("ARTIST")
+  venueId        Int?
+  artistId       Int?
+
 
   tokens   Token[]
   sessions Session[]
