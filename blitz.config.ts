@@ -8,7 +8,7 @@ const config: BlitzConfig = {
     }),
   ],
   images: {
-    domains: ["tailwindui.com"],
+    domains: ["tailwindui.com", "images.unsplash.com"],
   },
   /* Uncomment this to customize the webpack config
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
