@@ -10,8 +10,6 @@ const NewVenuePage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Create New Venue</h1>
-
       <VenueForm
         submitText="Create Venue"
         schema={createVenueSchema}

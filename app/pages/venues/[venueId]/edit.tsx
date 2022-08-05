@@ -21,11 +21,11 @@ export const EditVenue = () => {
   return (
     <>
       <Head>
-        <title>Edit Venue {venue.id}</title>
+        <title>Edit {venue.id}</title>
       </Head>
 
       <div>
-        <h1>Edit Venue {venue.id}</h1>
+        <h1>Edit {venue.id}</h1>
         <pre>{JSON.stringify(venue, null, 2)}</pre>
 
         <VenueForm

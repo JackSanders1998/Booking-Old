@@ -16,12 +16,11 @@ export const Venue = () => {
   return (
     <>
       <Head>
-        <title>Venue {venue.name}</title>
+        <title>{venue.name}</title>
       </Head>
 
       <div>
         <h1>{venue.name}</h1>
-        {/* <pre>{JSON.stringify(venue, null, 2)}</pre> */}
         <ul>
           {venue.timeSlots.map((timeslot) => (
             <li key={timeslot.id}>
