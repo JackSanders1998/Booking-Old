@@ -10,11 +10,27 @@ export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElem
   type?: "text" | "password" | "email" | "number"
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
   labelProps?: ComponentPropsWithoutRef<"label">
+  labelStyle?: string
+  inputContainerStyle?: string
+  inputStyle?: string
   fieldProps?: UseFieldConfig<string>
 }
 
 export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
-  ({ name, label, outerProps, fieldProps, labelProps, ...props }, ref) => {
+  (
+    {
+      name,
+      label,
+      outerProps,
+      fieldProps,
+      labelProps,
+      labelStyle,
+      inputContainerStyle,
+      inputStyle,
+      ...props
+    },
+    ref
+  ) => {
     const {
       input,
       meta: { touched, error, submitError, submitting },
@@ -31,33 +47,18 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps}>
+        <label {...labelProps} className={labelStyle}>
           {label}
-          <input {...input} disabled={submitting} {...props} ref={ref} />
+          <div className={inputContainerStyle}>
+            <input {...input} className={inputStyle} disabled={submitting} {...props} ref={ref} />
+          </div>
         </label>
 
         {touched && normalizedError && (
-          <div role="alert" style={{ color: "red" }}>
+          <div role="alert" className="text-red-600">
             {normalizedError}
           </div>
         )}
-
-        <style jsx>{`
-          label {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
-          }
-        `}</style>
       </div>
     )
   }

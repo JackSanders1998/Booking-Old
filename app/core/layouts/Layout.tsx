@@ -1,4 +1,5 @@
 import { Head, BlitzLayout } from "blitz"
+import Header from "../components/Header"
 
 const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
   title,
@@ -12,7 +13,10 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
       </Head>
       <div className="bg-slate-02 min-h-screen text-slate-12 font-readex">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto py-8">{children}</div>
+          <div className="max-w-5xl mx-auto py-8">
+            <Header />
+            {children}
+          </div>
         </div>
       </div>
     </>
