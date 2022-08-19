@@ -49,10 +49,3 @@ BookVenuePage.suppressFirstRenderFlicker = true
 BookVenuePage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default BookVenuePage
-
-{
-  /* <div>
-        <h1>{venue.name}</h1>
-        <pre>{JSON.stringify(venue, null, 2)}</pre>
-      </div> */
-}
