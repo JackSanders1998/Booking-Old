@@ -1,11 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid"
 import {
   add,
   eachDayOfInterval,
   endOfMonth,
   format,
+  getDate,
   getDay,
   isEqual,
   isSameMonth,
@@ -15,75 +16,19 @@ import {
 } from "date-fns"
 import { TimeSlot } from "@prisma/client"
 
-const events = [
-  {
-    id: 1,
-    name: "Leslie Alexander",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-11T13:00",
-    endDatetime: "2022-07-11T14:30",
-  },
-  {
-    id: 2,
-    name: "Jack Sanders",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-11T13:00",
-    endDatetime: "2022-07-11T14:30",
-  },
-  {
-    id: 3,
-    name: "Pablo Olavarrieta",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-12T22:30",
-    endDatetime: "2022-07-12T23:30",
-  },
-  {
-    id: 4,
-    name: "Hank Sanders",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-11T11:15",
-    endDatetime: "2022-07-11T13:45",
-  },
-  {
-    id: 5,
-    name: "Leslie Alexander",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-12T13:00",
-    endDatetime: "2022-07-12T14:30",
-  },
-  {
-    id: 6,
-    name: "Jack Sanders",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-12T13:00",
-    endDatetime: "2022-07-12T14:30",
-  },
-  {
-    id: 7,
-    name: "Pablo Olavarrieta",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    startDatetime: "2022-07-12T22:30",
-    endDatetime: "2022-07-12T23:30",
-  },
-]
-
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ")
 }
 
 export default function BookingTool(props: any) {
-  console.log(props.eventData)
   let today: Date = startOfToday()
-  let [selectedDay, setSelectedDay] = useState<Date[]>([])
+  let [selectedDates, setSelectedDates] = useState(new Set<string>())
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"))
   let firstDayCurrentMonth: Date = parse(currentMonth, "MMM-yyyy", new Date())
+
+  // useEffect(() => {
+  //   setSelectedDates(selectedDates)
+  // }, [selectedDates])
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -100,29 +45,31 @@ export default function BookingTool(props: any) {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"))
   }
 
-  const isDayEqual = (day: Date): Boolean => {
-    for (let i = 0; i < selectedDay.length; i++) {
-      if (isEqual(day, selectedDay[i] ?? -1)) {
-        return true
-      }
-    }
-    return false
-  }
+  // const isDayEqual = (day: Date): Boolean => {
+  //   selectedDates.forEach((date) => {
+  //     if (isEqual(day, date ?? -1)) {
+  //       return true
+  //     }
+  //   })
+  //   return false
+  // }
 
-  const onDateClick = (day: Date) => {
-    let isSelected = false
-    for (let i = 0; i < selectedDay.length; i++) {
-      if (isEqual(day, selectedDay[i] ?? -1)) {
-        isSelected = true
+  // Select a brand
+  const onDateClick = (selectedDate: Date) => {
+    const day = selectedDate.toString()
+    setSelectedDates((selectedDates) => {
+      console.log(selectedDates, day)
+      if (!selectedDates.has(day)) {
+        console.log("in here")
+        selectedDates = new Set(selectedDates)
+        selectedDates.add(day)
+        console.log(selectedDates)
+      } else {
+        selectedDates = new Set(selectedDates)
+        selectedDates.delete(day)
       }
-    }
-    if (!isSelected) {
-      selectedDay.push(day)
-      setSelectedDay(selectedDay)
-    } else {
-      selectedDay = selectedDay.filter((date) => !isEqual(day, date))
-      setSelectedDay(selectedDay)
-    }
+      return selectedDates
+    })
   }
 
   return (
@@ -172,20 +119,22 @@ export default function BookingTool(props: any) {
                 type="button"
                 onClick={() => onDateClick(day)}
                 className={classNames(
-                  isDayEqual(day) && "bg-slate-12 text-violet-01",
-                  !isDayEqual(day) && isToday(day) && "bg-slate-04 text-slate-12",
-                  !isDayEqual(day) &&
+                  selectedDates.has(day.toString()) && "bg-slate-12 text-violet-01",
+                  !selectedDates.has(day.toString()) && isToday(day) && "bg-slate-04 text-slate-12",
+                  !selectedDates.has(day.toString()) &&
                     !isToday(day) &&
                     isSameMonth(day, firstDayCurrentMonth) &&
                     "text-slate-12",
-                  !isDayEqual(day) &&
+                  !selectedDates.has(day.toString()) &&
                     !isToday(day) &&
                     !isSameMonth(day, firstDayCurrentMonth) &&
                     "text-red-400",
-                  isDayEqual(day) && isToday(day) && "bg-slate-12 text-violet-11",
-                  isDayEqual(day) && !isToday(day) && "bg-slate-12 text-violet-01",
-                  !isDayEqual(day) && "hover:bg-slate-10",
-                  (isDayEqual(day) || isToday(day)) && "text-slate-12",
+                  selectedDates.has(day.toString()) && isToday(day) && "bg-slate-12 text-violet-11",
+                  selectedDates.has(day.toString()) &&
+                    !isToday(day) &&
+                    "bg-slate-12 text-violet-01",
+                  !selectedDates.has(day.toString()) && "hover:bg-slate-10",
+                  (selectedDates.has(day.toString()) || isToday(day)) && "text-slate-12",
                   "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
                 )}
               >

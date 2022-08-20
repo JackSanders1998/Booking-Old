@@ -10,9 +10,6 @@ export const SigninButton = () => {
   const [logoutMutation] = useMutation(logout)
 
   if (currentUser) {
-    console.log("User id: ", currentUser.id)
-    console.log("User role: ", currentUser.role)
-
     return (
       <button
         className="inline-flex items-center px-1.5 py-1 border border-slate-07 text-base font-normal rounded text-slate-11 bg-slate-03 hover:bg-slate-08 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-08"
