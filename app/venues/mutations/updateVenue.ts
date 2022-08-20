@@ -24,8 +24,8 @@ export default resolver.pipe(
             // Appears to be a prisma bug,
             // because `|| 0` shouldn't be needed
             where: { id: timeSlot.id || 0 },
-            create: { start: timeSlot.start, end: timeSlot.end, venueId: id },
-            update: { start: timeSlot.start, end: timeSlot.end, venueId: id },
+            create: { start: timeSlot.start, end: timeSlot.end },
+            update: { start: timeSlot.start, end: timeSlot.end },
           })),
         },
       },
@@ -33,14 +33,7 @@ export default resolver.pipe(
         timeSlots: true,
       },
     })
-    const time_slot: any = await db.timeSlot.create({
-      data: {
-        ...data,
-        start: time_slot.start,
-        end: time_slot.end,
-        venueId: venue.id,
-      },
-    })
+
     return venue
   }
 )
