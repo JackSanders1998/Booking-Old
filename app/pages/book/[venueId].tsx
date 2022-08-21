@@ -3,6 +3,7 @@ import { Head, useRouter, useQuery, useParam, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getVenue from "app/venues/queries/getVenue"
 import BookingTool from "app/core/components/BookingTool"
+import { RecoilRoot } from "recoil"
 
 export const BookVenue = () => {
   const router = useRouter()
@@ -26,7 +27,9 @@ export const BookVenue = () => {
             </p>
           </div>
         </div>
-        <BookingTool />
+        <RecoilRoot>
+          <BookingTool />
+        </RecoilRoot>
       </div>
     </>
   )
