@@ -1,0 +1,136 @@
+// Next Imports
+import Head from "next/head"
+import { useState } from "react"
+import { Switch } from "@headlessui/react"
+import { useRouter } from "next/router"
+import useSWR from "swr"
+
+// Component Imports
+import Layout from "../components/Layouts/Layout"
+import Container from "../components/Elements/Container"
+import EventList from "../components/Calendar/EventList"
+import YourInfo from "../components/YourInfo"
+import CalendarAlt from "../components/Calendar/CalendarAlt"
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ")
+}
+
+const ToggleView = () => {
+  const [enabled, setEnabled] = useState(false)
+
+  return (
+    <Switch
+      checked={enabled}
+      onChange={setEnabled}
+      className={classNames(
+        enabled ? "bg-indigo-600" : "bg-gray-200",
+        "relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      )}
+    >
+      <span className="sr-only">Use setting</span>
+      <span
+        aria-hidden="true"
+        className={classNames(
+          enabled ? "translate-x-5" : "translate-x-0",
+          "pointer-events-none inline-block h-5 w-5 rounded-full bg-inherit shadow transform ring-0 transition ease-in-out duration-200"
+        )}
+      />
+    </Switch>
+  )
+}
+
+// Next stale-while-revalidate function. See https://swr.vercel.app
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+const VenueDetails = () => {
+  const [calendarMode, setCalendarMode] = useState(true)
+  const { query } = useRouter() // get current url i.e. medli.com/booking/jazz-showcase
+  const { data, error } = useSWR(() => query.id && `/api/venues/${query.id}`, fetcher) // fetch dynamic api route based on query.id i.e. /jazz-showcase
+
+  // error handling TODO: make this more sophisticated
+  if (error) return <div>Failed to load venues</div>
+  if (!data) return <div>Loading...</div>
+
+  return (
+    <Layout>
+      {data && (
+        <>
+          <Head>
+            <title>{data.name}</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <div className="py-2 w-full min-h-screen">
+            <div className="flex gap-16">
+              <div className="w-5/6">
+                <h2 className="py-2 font-readex font-semibold text-2xl text-slate-12">
+                  Book a show at {data.name}
+                </h2>
+                <p className="py-2 font-readex font-normal text-base text-slate-11">
+                  Click on a date in the calendar to see available timeslots. Pick all the timeslots
+                  you'd be available to play at {data.name} from the list.
+                </p>
+              </div>
+              <div className="w-1/6">
+                <button
+                  type="button"
+                  className="inline-flex items-center px-1.5 py-1 border border-slate-07 text-base font-normal rounded text-slate-11 bg-slate-03 hover:bg-slate-08 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-08"
+                >
+                  Sign in
+                </button>
+              </div>
+            </div>
+            <div className="pt-8 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1">
+              <div className="">
+                <div className="px-2 pb-8 grid grid-cols-2 gap-10">
+                  <div
+                    className={`overflow-hidden border-b-2 font-semibold text-base ${
+                      calendarMode
+                        ? "border-violet-11 text-violet-11"
+                        : "border-slate-08 text-slate-11"
+                    } hover:border-purple-500  hover:text-purple-500`}
+                  >
+                    <button
+                      type="button"
+                      className="px-2 pt-4 pb-2 "
+                      onClick={() => setCalendarMode(true)}
+                    >
+                      Find timeslots
+                    </button>
+                  </div>
+                  <div
+                    className={`overflow-hidden border-b-2 font-semibold text-base ${
+                      !calendarMode
+                        ? "border-violet-11 text-violet-11"
+                        : "border-slate-08 text-slate-11"
+                    } hover:border-purple-500  hover:text-purple-500`}
+                  >
+                    {" "}
+                    <button
+                      type="button"
+                      className="px-2 pt-4 pb-2 "
+                      onClick={() => setCalendarMode(false)}
+                    >
+                      Your info
+                    </button>
+                  </div>
+                </div>
+                <div className="px-4 py-5 sm:p-6 overflow-hidden rounded-lg bg-slate-01 border border-slate-06">
+                  {calendarMode ? <CalendarAlt /> : <YourInfo />}
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-lg">
+                <div className="px-4 py-5 sm:px-6">&nbsp;</div>
+                <div className="text-white px-4 py-5 sm:p-6">
+                  <EventList />
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </Layout>
+  )
+}
+
+export default VenueDetails
