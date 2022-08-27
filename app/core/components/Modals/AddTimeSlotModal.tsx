@@ -1,7 +1,7 @@
-import { Fragment, useState } from "react"
+import { ChangeEvent, ChangeEventHandler, Fragment, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { ClockIcon, TrashIcon } from "@heroicons/react/outline"
-import { ArrowCircleRightIcon } from "@heroicons/react/solid"
+import { PlusIcon } from "@heroicons/react/solid"
 import { add } from "date-fns"
 import { formatInTimeZone, utcToZonedTime } from "date-fns-tz"
 import createTimeSlot from "app/time-slots/mutations/createTimeSlot"
@@ -17,6 +17,7 @@ interface TimePickerProps {
   startOrEnd: "Start" | "End"
 }
 interface TimePicker {
+  [key: string]: number | string
   hour: number
   minute: number
   ampm: string
@@ -68,7 +69,7 @@ export default function AddTimeSlotModal(props: DatePickerProps) {
     }
   }
   const TimePicker = (props: TimePickerProps): JSX.Element => {
-    const handleChange = (key: any, value: any) => {
+    const handleChange = (key: string, value: any) => {
       if (props.startOrEnd === "Start") {
         startTime[key] = value.target.value
         setStartTime(startTime)
@@ -92,7 +93,7 @@ export default function AddTimeSlotModal(props: DatePickerProps) {
               name="hour"
               className="flex-1 bg-transparent appearance-none outline-none"
               defaultValue={props.startOrEnd === "Start" ? startTime.hour : endTime.hour}
-              onChange={(hour: number) => {
+              onChange={(hour: any) => {
                 handleChange("hour", hour)
               }}
             >
@@ -115,7 +116,7 @@ export default function AddTimeSlotModal(props: DatePickerProps) {
               name="minute"
               className="flex-1 bg-transparent appearance-none outline-none"
               defaultValue={props.startOrEnd === "Start" ? startTime.minute : endTime.minute}
-              onChange={(minute: number) => {
+              onChange={(minute: any) => {
                 handleChange("minute", minute)
               }}
             >
@@ -129,7 +130,7 @@ export default function AddTimeSlotModal(props: DatePickerProps) {
               name="ampm"
               className="flex-1 bg-transparent appearance-none outline-none"
               defaultValue={props.startOrEnd === "Start" ? startTime.ampm : endTime.ampm}
-              onChange={(ampm: string) => {
+              onChange={(ampm: any) => {
                 handleChange("ampm", ampm)
               }}
             >
@@ -146,10 +147,11 @@ export default function AddTimeSlotModal(props: DatePickerProps) {
     <>
       <button
         type="button"
-        className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+        className="text-slate-01 relative rounded-lg bg-violet-11 mx-1 px-3 py-2 shadow-sm flex items-center space-x-3 hover:bg-violet-500 focus-within:ring-2 focus-within:ring-offset-2"
         onClick={() => setOpen(true)}
       >
-        AddTimeSlot
+        Add a Time Slot
+        <PlusIcon className="h-5 w-5" aria-hidden="true" />
       </button>{" "}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
