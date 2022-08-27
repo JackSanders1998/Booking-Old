@@ -24,8 +24,6 @@ interface TimePicker {
 }
 
 export default function AddTimeSlotModal(props: DatePickerProps) {
-  console.log(props.day)
-  console.log(typeof props.day)
   const router = useRouter()
   const venueId = useParam("venueId", "number")
   const [venue, { setQueryData, refetch }] = useQuery(
