@@ -12,7 +12,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
 
   return (
-    <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-slate-11">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-slate-01 border border-slate-06 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <Form

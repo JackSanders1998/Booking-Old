@@ -3,9 +3,6 @@ import db from "db"
 import { z } from "zod"
 
 const CreateTimeSlot = z.object({
-  id: z.number(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
   start: z.date(),
   end: z.date(),
   venueId: z.number(),
