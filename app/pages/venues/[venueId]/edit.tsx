@@ -1,9 +1,7 @@
 import React, { Fragment, Suspense, useState } from "react"
-import { Head, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
+import { Head, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getVenue from "app/venues/queries/getVenue"
-import updateVenue from "app/venues/mutations/updateVenue"
-import { VenueForm, FORM_ERROR } from "app/venues/components/VenueForm"
 import AddTimeSlotModal from "app/core/components/Modals/AddTimeSlotModal"
 import {
   add,

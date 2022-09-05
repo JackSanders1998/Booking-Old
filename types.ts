@@ -3,6 +3,12 @@ import { User } from "db"
 
 // Note: You should switch to Postgres and then use a DB enum for role type
 export type Role = "ADMIN" | "USER" | "VENUE" | "ARTIST"
+export enum RoleMode {
+  ADMIN = "ADMIN",
+  USER = "USER",
+  VENUE = "VENUE",
+  ARTIST = "ARTIST",
+}
 
 declare module "blitz" {
   export interface Ctx extends DefaultCtx {

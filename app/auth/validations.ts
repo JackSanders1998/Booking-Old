@@ -1,3 +1,4 @@
+import { RoleMode } from "types"
 import { z } from "zod"
 
 export const email = z
@@ -11,9 +12,12 @@ export const password = z
   .max(100)
   .transform((str) => str.trim())
 
+export const role = z.nativeEnum(RoleMode)
+
 export const Signup = z.object({
   email,
   password,
+  role,
 })
 
 export const Login = z.object({
