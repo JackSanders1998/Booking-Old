@@ -1,4 +1,5 @@
 import React from "react"
+import "./button.css"
 
 interface ButtonProps {
   /**
@@ -24,6 +25,15 @@ interface ButtonProps {
 }
 
 /**
+ *
+ * @param classes
+ * @returns
+ */
+function classNames(...classes: any[]) {
+  return classes.filter(Boolean).join(" ")
+}
+
+/**
  * Primary UI component for user interaction
  */
 export const Button = ({
@@ -37,7 +47,8 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(" ")}
+      // className={["storybook-button", `storybook-button--${size}`, mode].join(" ")}
+      className="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       style={{ backgroundColor }}
       {...props}
     >
